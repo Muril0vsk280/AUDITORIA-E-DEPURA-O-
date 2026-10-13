@@ -16,9 +16,12 @@ const cancelEditButton = document.querySelector('#cancelEditButton');
 const clearButton = document.querySelector('#clearButton');
 const productSearch = document.querySelector('#productSearch');
 
-// Os dados ficam em memória durante a execução desta página.
-const products = [];
-let nextProductId = 1;
+const products = JSON.parse(localStorage.getItem('products')) || [];
+
+let nextProductId = products.length > 0
+  ? Math.max(...products.map(product => product.id)) + 1
+  : 1;
+
 let editingProductId = null;
 
 const currencyBRL = new Intl.NumberFormat('pt-BR', {
