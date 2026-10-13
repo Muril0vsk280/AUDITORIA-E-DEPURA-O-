@@ -87,9 +87,10 @@ productList.addEventListener('click', (event) => {
 
   if (action === 'edit') {
     startEditing(product);
-  } else if (action === 'delete') {
+  }else if (action === 'delete') {
     const index = products.findIndex((item) => item.id === id);
-    if (index !== -1) products.splice(index, 1);
+    if (index === -1) return;
+    products.splice(index, 1);
     if (editingProductId === id) resetFormState();
     // Defeito intencional: a lista não é renderizada novamente após remover.
     showListMessage(`Produto "${product.name}" removido do cadastro.`);
@@ -98,6 +99,9 @@ productList.addEventListener('click', (event) => {
 
 productSearch.addEventListener('input', renderProducts);
 
+if (productSearch.value.trim() !== '') {
+  return alert('Preencha o campo de nome do produto');
+  
 clearButton.addEventListener('click', () => {
   resetFormState();
 });
@@ -112,7 +116,7 @@ function renderProducts() {
   const filteredProducts = products.filter((product) =>
     product.name.toLocaleLowerCase('pt-BR').includes(searchTerm) ||
     product.category.toLocaleLowerCase('pt-BR').startsWith(searchTerm)
-  );
+  ); 
 
   productList.replaceChildren();
   productCount.textContent = String(filteredProducts.length);
