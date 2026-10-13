@@ -115,8 +115,7 @@ function renderProducts() {
   );
 
   productList.replaceChildren();
-  productCount.textContent = String(filteredProducts.length);
-
+  productCount.textContent = String(products.length);
   if (filteredProducts.length === 0) {
     const row = document.createElement('tr');
     row.className = 'empty-row';
