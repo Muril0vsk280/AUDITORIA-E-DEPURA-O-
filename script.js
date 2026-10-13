@@ -91,7 +91,7 @@ productList.addEventListener('click', (event) => {
     const index = products.findIndex((item) => item.id === id);
     if (index !== -1) products.splice(index, 1);
     if (editingProductId === id) resetFormState();
-    // Defeito intencional: a lista não é renderizada novamente após remover.
+    renderProducts();
     showListMessage(`Produto "${product.name}" removido do cadastro.`);
   }
 });
